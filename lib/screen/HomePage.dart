@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sempreliso/screen/FormPage.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -23,7 +24,11 @@ class HomePage extends StatelessWidget {
           centerTitle: true,
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+              return BlankPage();
+            }));
+          },
           child: Icon(Icons.add),
         ),
         body: SafeArea(
