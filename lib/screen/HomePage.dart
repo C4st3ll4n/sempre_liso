@@ -17,8 +17,7 @@ class HomePage extends StatelessWidget {
       Financas(13, "Compra de MacBook", 5000.0, true),
     ];
 
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Sempre liso"),
           centerTitle: true,
@@ -34,7 +33,6 @@ class HomePage extends StatelessWidget {
         body: SafeArea(
           child: ListaLancamento(financeiro: financeiro,),
         ),
-      ),
     );
   }
 }
@@ -46,6 +44,13 @@ class Financas {
   bool isDebito;
 
   Financas(this.id, this.titulo, this.valor, this.isDebito);
+
+  @override
+  String toString() {
+    return 'Financas{id: $id, titulo: $titulo, valor: $valor, isDebito: $isDebito}';
+  }
+
+
 }
 
 class ListaLancamento extends StatelessWidget {

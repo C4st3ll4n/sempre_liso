@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sempreliso/screen/HomePage.dart';
 
 class BlankPage extends StatefulWidget {
   @override
@@ -7,9 +8,11 @@ class BlankPage extends StatefulWidget {
 }
 
 class _BlankPageState extends State<BlankPage> {
-  TextEditingController _controllerTitulo;
-  TextEditingController _controllerValor;
+  TextEditingController _controllerTitulo = TextEditingController();
+  TextEditingController _controllerValor = TextEditingController();
   bool isCredito = false;
+
+  SnackBar snackbar = SnackBar(content: Text("Hello"),);
 
   @override
   Widget build(BuildContext context) {
@@ -24,61 +27,80 @@ class _BlankPageState extends State<BlankPage> {
         title: Text("Adicionar item"),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _controllerTitulo,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hasFloatingPlaceholder: true,
-                    hintText: "Insira um títlo",
-                    alignLabelWithHint: true,
-                    helperText: "Exemplo: Compra de um notebook"),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _controllerTitulo,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.short_text),
+                      border: OutlineInputBorder(),
+                      hasFloatingPlaceholder: true,
+                      hintText: "Insira um títlo",
+                      alignLabelWithHint: true,
+                      labelText: "Título",
+                      helperText: "Exemplo: Compra de um notebook"),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _controllerValor,
-                keyboardType: TextInputType.numberWithOptions(
-                    signed: true, decimal: true),
-                decoration: InputDecoration(
-                    prefixText: "R\$ ",
-                    border: OutlineInputBorder(),
-                    hasFloatingPlaceholder: true,
-                    hintText: "Insira um valor",
-                    alignLabelWithHint: true,
-                    helperText: "Exemplo: R\$200"),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _controllerValor,
+                  keyboardType: TextInputType.numberWithOptions(
+                      signed: true, decimal: true),
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.monetization_on),
+                      prefixText: "R\$ ",
+                      border: OutlineInputBorder(),
+                      hasFloatingPlaceholder: true,
+                      hintText: "Insira um valor",
+                      labelText: "Valor",
+                      alignLabelWithHint: true,
+                      helperText: "Exemplo: R\$200"),
+                ),
               ),
-            ),
-            CheckboxListTile(
-                selected: isCredito,
-                activeColor: Colors.lightGreen,
-                secondary: Icon(icone),
-                checkColor: Colors.white,
-                title: Text("$checkBoxText"),
-                value: isCredito,
-                onChanged: (newValue) {
-                  setState(() {
-                    isCredito = newValue;
-                    print(isCredito);
-                  });
-                }),
+              CheckboxListTile(
+                  selected: isCredito,
+                  activeColor: Colors.lightGreen,
+                  secondary: Icon(icone),
+                  checkColor: Colors.white,
+                  title: Text("$checkBoxText"),
+                  value: isCredito,
+                  onChanged: (newValue) {
+                    setState(() {
+                      isCredito = newValue;
+                    });
+                  }),
 
-            SizedBox(height: 30,),
+              SizedBox(height: 30,),
 
-            DropdownButton(
-              hint: Text("Oi"),
-                items: [
-                  DropdownMenuItem(child: Text("OI"),)
-                ], onChanged: null
-            )
-          ],
+              RaisedButton(
+                child: Icon(Icons.save), onPressed: () {
+                  String titulo = _controllerTitulo.text.trim();
+                  //tulo
+                  double valor = double.parse(_controllerValor.value.text);
+                  Financas f = Financas(100,titulo,valor, !isCredito);
+                print("$f");
+
+                Scaffold.of(context).showSnackBar(snackbar);
+              },
+              )
+
+              /*DropdownButton(
+                hint: Text("Oi"),
+                  items: [
+                    DropdownMenuItem(child: Text("OI"),)
+                  ], onChanged: null
+              )*/
+            ],
+          ),
         ),
       ),
     );
   }
+
 }
