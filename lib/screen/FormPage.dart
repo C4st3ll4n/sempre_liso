@@ -12,7 +12,9 @@ class _BlankPageState extends State<BlankPage> {
   TextEditingController _controllerValor = TextEditingController();
   bool isCredito = false;
 
-  SnackBar snackbar = SnackBar(content: Text("Hello"),);
+  SnackBar snackbar = SnackBar(
+    content: Text("Hello"),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class _BlankPageState extends State<BlankPage> {
                 child: TextField(
                   controller: _controllerTitulo,
                   decoration: InputDecoration(
-                    icon: Icon(Icons.short_text),
+                      icon: Icon(Icons.short_text),
                       border: OutlineInputBorder(),
                       hasFloatingPlaceholder: true,
                       hintText: "Insira um títlo",
@@ -53,7 +55,7 @@ class _BlankPageState extends State<BlankPage> {
                   keyboardType: TextInputType.numberWithOptions(
                       signed: true, decimal: true),
                   decoration: InputDecoration(
-                    icon: Icon(Icons.monetization_on),
+                      icon: Icon(Icons.monetization_on),
                       prefixText: "R\$ ",
                       border: OutlineInputBorder(),
                       hasFloatingPlaceholder: true,
@@ -75,19 +77,12 @@ class _BlankPageState extends State<BlankPage> {
                       isCredito = newValue;
                     });
                   }),
-
-              SizedBox(height: 30,),
-
+              SizedBox(
+                height: 30,
+              ),
               RaisedButton(
-                child: Icon(Icons.save), onPressed: () {
-                  String titulo = _controllerTitulo.text.trim();
-                  //tulo
-                  double valor = double.parse(_controllerValor.value.text);
-                  Financas f = Financas(100,titulo,valor, !isCredito);
-                print("$f");
-
-                Scaffold.of(context).showSnackBar(snackbar);
-              },
+                child: Icon(Icons.save),
+                onPressed: inserirFinanca,
               )
 
               /*DropdownButton(
@@ -103,4 +98,12 @@ class _BlankPageState extends State<BlankPage> {
     );
   }
 
+  void inserirFinanca() {
+    String titulo = _controllerTitulo.text.trim();
+    double valor = double.parse(_controllerValor.value.text);
+    Financas f = Financas(15, titulo, valor, !isCredito);
+    //print("$f");
+
+    Navigator.pop(context, f);
+  }
 }
