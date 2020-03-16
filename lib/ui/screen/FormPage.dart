@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sempreliso/screen/HomePage.dart';
+import 'package:sempreliso/model/Financa.dart';
+import 'package:sempreliso/ui/screen/HomePage.dart';
 
 class BlankPage extends StatefulWidget {
   @override
