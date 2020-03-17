@@ -3,6 +3,7 @@ import 'package:sempreliso/model/Financa.dart';
 import 'package:sempreliso/ui/screen/FormPage.dart';
 import 'package:sempreliso/ui/widget/ListaLancamento.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
